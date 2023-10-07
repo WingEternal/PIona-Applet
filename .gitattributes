@@ -1,0 +1,2 @@
+package/contents/image/portrait.png filter=lfs diff=lfs merge=lfs -text
+doc/preview.png filter=lfs diff=lfs merge=lfs -text

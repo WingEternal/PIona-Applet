@@ -1,0 +1,26 @@
+{
+  "KPlugin": {
+    "Authors": [
+      {
+        "Email": "dradcr7@gmail.com",
+        "Name": "WingEternal"
+      }
+    ],
+    "Category": "Date and Time",
+    "Description": "",
+    "EnabledByDefault": true,
+    "Icon": "icon",
+    "Id": "com.github.wingeternal.plasma5-applets-iona",
+    "License": "GPL-3.0",
+    "Name": "PIona Applet",
+    "ServiceTypes": [
+      "Plasma/Applet"
+    ],
+    "Version": "0.1",
+    "Website": "https://github.com/WingEternal/Project-Iona-Applets"
+  },
+  "X-Plasma-API": "declarativeappletscript",
+  "X-Plasma-MainScript": "ui/main.qml",
+  "X-KDE-ServiceTypes": "Plasma/Applet",
+  "X-Plasma-StandAloneApplet": "true"
+}

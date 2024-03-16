@@ -6,19 +6,22 @@
 
 import QtQuick 2.15
 import QtQuick.Layouts 1.1
-import org.kde.plasma.core 2.0 as PlasmaCore
-import org.kde.plasma.components 3.0 as PlasmaComponents3
+import org.kde.plasma.core as PlasmaCore
+import org.kde.plasma.components 3.0 as PlasmaComponents
 import org.kde.plasma.plasmoid 2.0
+import org.kde.kirigami 2.20 as Kirigami
+import org.kde.plasma.plasma5support 2.0 as P5Support
+import org.kde.ksvg 1.0 as KSvg
 
-Item {
+PlasmoidItem {
   id: root
 
-  width: 360 * PlasmaCore.Units.devicePixelRatio
-  height: 180 * PlasmaCore.Units.devicePixelRatio 
+  width: 360
+  height: 180
 
   Plasmoid.backgroundHints: PlasmaCore.Types.DefaultBackground | PlasmaCore.Types.ConfigurableBackground
 
-  PlasmaCore.DataSource {
+  P5Support.DataSource {
     id: time_source
     engine: "time"
     connectedSources: "Local"
@@ -49,55 +52,49 @@ Item {
     }
   } // PlasmaCore.DataSource time_source
 
-  Plasmoid.preferredRepresentation: Plasmoid.compactRepresentation
-  Plasmoid.compactRepresentation: MouseArea {
-    id: compact
-    
-    Layout.minimumWidth: Plasmoid.formFactor !== PlasmaCore.Types.Vertical ? compact.height : PlasmaCore.Units.gridUnit
-    Layout.minimumHeight: Plasmoid.formFactor === PlasmaCore.Types.Vertical ? compact.width : PlasmaCore.Units.gridUnit
+  Image {
+    id: portrait
+    source: "../image/portrait.png"
+    fillMode: Image.PreserveAspectFit
+    anchors {
+      top: parent.top
+      bottom: parent.bottom
+      right: parent.right
+    }
+  } // Image portrait
 
-    Image {
-      id: portrait
-      source: "../image/portrait.png"
-      fillMode: Image.PreserveAspectFit
-      anchors {
-        top: parent.top
-        bottom: parent.bottom
-        right: parent.right
-      }
-    } // Image portrait
+  Item {
+    id: data_ui
+    x: 0.05 * parent.width
+    y: 0
+    width: 0.4 * parent.width
+    height: 0.7 * parent.height
 
-    Item {
-      id: data_ui
-      x: 0.05 * parent.width
-      y: 0
-      width: 0.4 * parent.width
-      height: 0.7 * parent.height
+    ColumnLayout {
+      anchors.fill: parent
+      PlasmaComponents.Label {
+        id: time
+        text: getTimeString()
+        font.pixelSize: 50
+        Layout.alignment: Qt.AlignHCenter | Qt.AlignBottom
+        function getTimeString() {
+          return time_source.hours + ":" + time_source.minutes + ":" +
+                  time_source.seconds;
+        }
+      } // PlasmaComponents.Label time
 
-      ColumnLayout {
-        anchors.fill: parent
-        PlasmaComponents3.Label {
-          id: time
-          text: getTimeString()
-          font.pixelSize: 50 * PlasmaCore.Units.devicePixelRatio
-          Layout.alignment: Qt.AlignHCenter | Qt.AlignBottom
-          function getTimeString() {
-            return time_source.hours + ":" + time_source.minutes + ":" +
-                   time_source.seconds;
-          }
-        } // PlasmaComponents3.Label time
-
-        PlasmaComponents3.Label {
-          id: date
-          text: getDateString()
-          font.pixelSize: 20 * PlasmaCore.Units.devicePixelRatio
-          Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
-          function getDateString() {
-            return time_source.years + "-" + time_source.months + "-" +
-                   time_source.days;
-          }
-        } // PlasmaComponents3.Label date
-      } // ColumnLayout
+      PlasmaComponents.Label {
+        id: date
+        text: getDateString()
+        font.pixelSize: 20
+        Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
+        function getDateString() {
+          console.error(time_source.years + "-" + time_source.months + "-" +
+                      time_source.days)
+          return time_source.years + "-" + time_source.months + "-" +
+                  time_source.days;
+        }
+      } // PlasmaComponents.Label date
     } // Item data_ui
   } // compactRepresentation MouseArea compact
 } // Item root

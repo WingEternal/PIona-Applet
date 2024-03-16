@@ -1,4 +1,5 @@
 {
+  "KPackageStructure": "Plasma/Applet",
   "KPlugin": {
     "Authors": [
       {
@@ -10,17 +11,12 @@
     "Description": "",
     "EnabledByDefault": true,
     "Icon": "icon",
-    "Id": "com.github.wingeternal.plasma5-applets-iona",
+    "Id": "com.github.wingeternal.project-iona-applets",
     "License": "GPL-3.0",
-    "Name": "PIona Applet",
-    "ServiceTypes": [
-      "Plasma/Applet"
-    ],
+    "Name": "ProjectIona Applets",
     "Version": "0.1",
     "Website": "https://github.com/WingEternal/Project-Iona-Applets"
   },
-  "X-Plasma-API": "declarativeappletscript",
-  "X-Plasma-MainScript": "ui/main.qml",
-  "X-KDE-ServiceTypes": "Plasma/Applet",
-  "X-Plasma-StandAloneApplet": "true"
+  "X-Plasma-API-Minimum-Version": "6.0",
+  "X-KDE-ParentApp": "org.kde.plasmashell"
 }
